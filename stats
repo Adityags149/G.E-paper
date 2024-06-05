@@ -1,0 +1,24 @@
+if covariance is given critical value qnorm() else qt(1-alpha/2,n-1)
+
+variance test
+critical = qnorm(1-(0.05/2),9,9)
+
+
+res = c()
+for (N in 100:10000){
+  x = rnorm(N,2,5)
+  res=c(res,mean(x))
+}
+plot(res, type='l')
+lines(1:length(res), rep(2,length(res)),col='red')
+
+
+perished <- c(122,167,528,673)
+surv <- c(203, 118, 178, 212)
+total_obser <- sum(perished)+sum(surv)
+clas_total <-  c(perished+surv)
+observed <- c(sum(perished), sum(surv))
+expected <- outer(clas_total,observed)/total_obser
+CHI <- sum((c(perished,surv)-expected)^2/expected)
+df = (length(perished)-1)*(2-1)
+critical_value <-  1- qchisq(0.95, df)
